@@ -1,0 +1,71 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.container-fluid {
+  background-image: url("https://images.pexels.com/photos/30741323/pexels-photo-30741323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-card {
+  background-color: rgba(0, 0, 0, 0.3); /* Reduce la opacidad */
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Suaviza la sombra */
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.top-right {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.form-label {
+  color: white;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .login-card {
+    padding: 20px;
+  }
+
+  .top-right {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .login-card {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .btn-success {
+    width: 100%;
+  }
+}

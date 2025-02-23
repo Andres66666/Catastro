@@ -1,0 +1,94 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav align-items: center"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+    style="background-color: rgb(88, 214, 141)"
+  >
+    <div class="text-center mt-2 mb-2">
+      <img
+        src="https://www.thesprucepets.com/thmb/VDro2rx3m2WWj7h6Y6Cf3YA1nb0=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/AleksandrZotovAmericanBulldog-c717bec4805c43fab4c61f91da5f9d93.jpg"
+        alt="Foto de usuario"
+        class="rounded-circle img-fluid mb-3"
+        style="width: 150px; height: 150px"
+      />
+    </div>
+    <div class="container mt-5">
+      <div class="px-2">
+        <!-- Agrega padding a los lados -->
+        <p><strong>Nombre:</strong> Juan Pérez Mamani</p>
+        <p><strong>Rol:</strong> Admin</p>
+      </div>
+    </div>
+
+    <hr />
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar
+      color="primary"
+      style="
+        background-color: rgb(88, 214, 141);
+        justify-content: space-between;
+      "
+    >
+      <div class="text-start">
+        <button
+          *ngIf="isHandset$ | async"
+          mat-icon-button
+          (click)="drawer.toggle()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+
+      <div class="d-flex text-start">
+        <button class="btn btn-link">
+          <i class="fas fa-bell"></i>
+        </button>
+        <button class="btn btn-link">
+          <i class="fas fa-envelope"></i>
+        </button>
+        <button class="btn btn-link">
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+    </mat-toolbar>
+
+    <!-- Dashboard Content -->
+    <div class="grid-container">
+      <h1 class="mat-h1 text-center">Dashboard</h1>
+      <mat-grid-list cols="2" rowHeight="350px">
+        <mat-grid-tile
+          *ngFor="let card of cards | async; let i = index"
+          [colspan]="card.cols"
+          [rowspan]="card.rows"
+          [ngClass]="'card-' + (i + 1)"
+        >
+          <mat-card class="dashboard-card">
+            <mat-card-header class="dashboard-card-header">
+              <mat-card-title>
+                {{ card.title }}
+                <button mat-icon-button mat-menu-trigger class="more-button">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="dashboard-card-content">
+              <div>Card Content Here</div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

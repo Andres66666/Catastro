@@ -1,1 +1,61 @@
-<p>login works!</p>
+<!DOCTYPE html>
+<div class="container-fluid">
+  <div class="login-card">
+    <!-- Botón de regreso al inicio -->
+    <div class="text-end">
+      <a class="btn btn-light" (click)="navigateNavegacion()">
+        <i class="fas fa-home"></i>
+      </a>
+    </div>
+
+    <!-- Logo -->
+    <div class="text-center">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/4/47/Escudo_del_Beni.png"
+        alt="Logo Gobernación del Beni"
+        class="img-fluid mb-3"
+        style="max-width: 120px"
+      />
+    </div>
+
+    <!-- Título -->
+    <h2 class="mb-4 text-center text-white">Iniciar Sesión</h2>
+
+    <!-- Formulario de Login -->
+    <form>
+      <div class="mb-3">
+        <label for="username" class="form-label">Usuario</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          placeholder="Ingrese su usuario"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Ingrese su contraseña"
+          required
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-success w-100 mb-3"
+        (click)="navigateNavegacion()"
+      >
+        Iniciar Sesión
+      </button>
+
+      <p class="text-center text-muted">
+        <a href="#" class="text-success">¿Olvidaste tu contraseña?</a>
+      </p>
+    </form>
+  </div>
+</div>

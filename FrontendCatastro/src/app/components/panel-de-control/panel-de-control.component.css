@@ -1,0 +1,63 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 300px;
+  border-radius: 0; /* Quitar las curvas redondeadas */
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.grid-container {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  padding: 20px; /* Espacio interno en la tarjeta */
+}
+
+/* Colores para las tarjetas */
+.card-1 {
+  background-color: #0f89e0; /* Azul claro */
+}
+
+.card-2 {
+  background-color: #c4144e; /* Rosa claro */
+}
+
+.card-3 {
+  background-color: #0b5211; /* Verde claro */
+}
+
+.card-4 {
+  background-color: #bd7f1c; /* Naranja claro */
+}
+.card-5 {
+  background-color: #9fda16; /* Naranja claro */
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
