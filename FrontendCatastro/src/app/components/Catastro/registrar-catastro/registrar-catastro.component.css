@@ -1,0 +1,49 @@
+table {
+    display: block; /* Permite que la tabla tenga un comportamiento de bloque */
+    margin: 150px auto; /* Margen superior e inferior, centrado horizontalmente */
+    max-width: 100%; /* Permitir que la tabla no exceda el ancho de la pantalla */
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+    scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+    -ms-overflow-style: none; /* Oculta la barra de desplazamiento en IE y Edge */
+}
+
+table::-webkit-scrollbar {
+    display: none; /* Oculta la barra de desplazamiento en Chrome y Safari */
+}
+
+td, th {
+    border: 1px solid #595959; /* Borde de las celdas */
+    border-collapse: collapse; /* Colapsa los bordes de la tabla */
+    padding: auto; /* Espaciado interno */
+    height: 30px; /* Altura de las celdas */
+    width: 60px; /* Ancho de las celdas */
+}
+
+.vertical-text {
+    writing-mode: vertical-rl; /* Rotar el texto verticalmente */
+    transform: rotate(180deg); /* Ajustar la dirección del texto */
+    text-align: center; /* Centrar el texto */
+    padding: 5px; /* Ajustar el padding para reducir el espacio horizontal */
+    width: 50px; /* Establecer un ancho específico para la celda */
+    height: auto;
+}
+.single-line {
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+}
+/* texto centrado de la celda */
+.mid {
+    text-align: center;
+}
+#g-a{
+    text-align: start;
+    font-size: 12px; /* Aumentar el tamaño del texto */
+}
+#t-f{
+    text-align: center;
+    padding: 20px;
+    font-size: 50px; /* Aumentar el tamaño del texto */
+}
+#t-f2{
+    text-align: center;
+    font-size: 40px; /* Aumentar el tamaño del texto */
+}

@@ -9,14 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-
-interface Card {
-  title: string;
-  cols: number;
-  rows: number;
-}
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-panel-de-control',
@@ -34,6 +29,7 @@ interface Card {
     MatMenuModule,
     MatGridListModule,
     AsyncPipe,
+    RouterModule
   ],
 })
 export class PanelDeControlComponent {
@@ -45,15 +41,4 @@ export class PanelDeControlComponent {
       map((result) => result.matches),
       shareReplay()
     );
-
-  // Usar BehaviorSubject para emitir los datos
-  private cardsSubject = new BehaviorSubject<Card[]>([
-    { title: 'Card 1', cols: 1, rows: 1 },
-    { title: 'Card 2', cols: 1, rows: 1 },
-    { title: 'Card 3', cols: 1, rows: 1 },
-    { title: 'Card 4', cols: 1, rows: 1 },
-    { title: 'Card 5', cols: 2, rows: 1 },
-  ]);
-
-  cards: Observable<Card[]> = this.cardsSubject.asObservable();
 }

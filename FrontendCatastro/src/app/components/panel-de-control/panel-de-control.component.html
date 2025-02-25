@@ -18,18 +18,18 @@
     </div>
     <div class="container mt-5">
       <div class="px-2">
-        <!-- Agrega padding a los lados -->
         <p><strong>Nombre:</strong> Juan Pérez Mamani</p>
         <p><strong>Rol:</strong> Admin</p>
       </div>
     </div>
 
     <hr />
-    <mat-toolbar>Menu</mat-toolbar>
+<!--     <mat-toolbar >Menu</mat-toolbar> -->
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item routerLink="registrar-catastro">Registrar Catastro</a>
+      <a mat-list-item routerLink="listar-catastro">Listar Catastro</a>
+      <a mat-list-item routerLink="ver-catastro/1">Ver Catastro</a> <!-- Cambia el ID según sea necesario -->
+      <a mat-list-item routerLink="editar-catastro/1">Editar Catastro</a> <!-- Cambia el ID según sea necesario -->
     </mat-nav-list>
   </mat-sidenav>
 
@@ -64,31 +64,14 @@
       </div>
     </mat-toolbar>
 
-    <!-- Dashboard Content -->
-    <div class="grid-container">
-      <h1 class="mat-h1 text-center">Dashboard</h1>
-      <mat-grid-list cols="2" rowHeight="350px">
-        <mat-grid-tile
-          *ngFor="let card of cards | async; let i = index"
-          [colspan]="card.cols"
-          [rowspan]="card.rows"
-          [ngClass]="'card-' + (i + 1)"
-        >
-          <mat-card class="dashboard-card">
-            <mat-card-header class="dashboard-card-header">
-              <mat-card-title>
-                {{ card.title }}
-                <button mat-icon-button mat-menu-trigger class="more-button">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="dashboard-card-content">
-              <div>Card Content Here</div>
-            </mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
+    <!-- Aquí se renderizarán los componentes de las rutas -->
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100%;">
+      <div class="row" style="margin: 10px;">
+        <div class="col-12" style="padding: 10px;">
+          <!-- Aquí se renderizarán los componentes de las rutas -->
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
