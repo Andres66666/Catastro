@@ -7,19 +7,19 @@ import { ListarCatastroComponent } from './components/Catastro/listar-catastro/l
 import { VerCatastroComponent } from './components/Catastro/ver-catastro/ver-catastro.component';
 import { ActualizarCatastroComponent } from './components/Catastro/actualizar-catastro/actualizar-catastro.component';
 export const routes: Routes = [
-  { path: '', component: RegistrarCatastroComponent },
-  /* { path: 'index', component: IndexComponent },
+  { path: '', component: IndexComponent },
+  { path: 'index', component: IndexComponent },
   { path: 'login', component: LoginComponent },
-  { 
-    path: 'panelControl', 
-    component: PanelDeControlComponent, 
+  {
+    path: 'panelControl',
+    component: PanelDeControlComponent,
     children: [
       { path: 'registrar-catastro', component: RegistrarCatastroComponent },
       { path: 'listar-catastro', component: ListarCatastroComponent },
       { path: 'ver-catastro/:id', component: VerCatastroComponent },
       { path: 'editar-catastro/:id', component: ActualizarCatastroComponent },
-      { path: '', redirectTo: 'listar-catastro', pathMatch: 'full' } // Redirige a listar-catastro por defecto
-    ]
+      { path: '', redirectTo: 'listar-catastro', pathMatch: 'full' }, // Redirige a listar-catastro por defecto
+    ],
   },
-  { path: '**', redirectTo: '/panelControl' } // Redirige cualquier ruta no encontrada al panel de control */
+  { path: '**', redirectTo: '/panelControl' }, // Redirige cualquier ruta no encontrada al panel de control
 ];

@@ -7,8 +7,24 @@
   border-radius: 0; /* Quitar las curvas redondeadas */
 }
 
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
+.custom-container {
+  max-width: 2000px; /* Ajusta el ancho máximo según sea necesario */
+  width: 100%; /* Asegúrate de que ocupe el 100% del ancho disponible */
+  margin-left: 200px;
+  margin-right: 200px;
+  background-color: aqua;
+}
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+  .sidenav {
+    position: fixed; /* Fijar el sidenav en la parte izquierda */
+    z-index: 2; /* Asegurarse de que esté por encima del contenido */
+    height: 100%; /* Asegurarse de que ocupe toda la altura */
+  }
+
+  .mat-toolbar.mat-primary {
+    position: fixed; /* Fijar la barra de herramientas en la parte superior */
+    width: 100%; /* Asegurarse de que ocupe todo el ancho */
+    z-index: 3; /* Asegurarse de que esté por encima del sidenav */
+  }
 }

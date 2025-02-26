@@ -24,12 +24,11 @@
     </div>
 
     <hr />
-<!--     <mat-toolbar >Menu</mat-toolbar> -->
     <mat-nav-list>
       <a mat-list-item routerLink="registrar-catastro">Registrar Catastro</a>
       <a mat-list-item routerLink="listar-catastro">Listar Catastro</a>
-      <a mat-list-item routerLink="ver-catastro/1">Ver Catastro</a> <!-- Cambia el ID según sea necesario -->
-      <a mat-list-item routerLink="editar-catastro/1">Editar Catastro</a> <!-- Cambia el ID según sea necesario -->
+      <a mat-list-item routerLink="ver-catastro/1">Ver Catastro</a>
+      <a mat-list-item routerLink="editar-catastro/1">Editar Catastro</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -65,13 +64,10 @@
     </mat-toolbar>
 
     <!-- Aquí se renderizarán los componentes de las rutas -->
-    <div class="container d-flex justify-content-center align-items-center" style="height: 100%;">
-      <div class="row" style="margin: 10px;">
-        <div class="col-12" style="padding: 10px;">
-          <!-- Aquí se renderizarán los componentes de las rutas -->
-          <router-outlet></router-outlet>
-        </div>
-      </div>
+    <div
+      class="container d-flex justify-content-center align-items-center custom-container"
+    >
+      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
