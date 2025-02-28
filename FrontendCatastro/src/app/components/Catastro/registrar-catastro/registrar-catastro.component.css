@@ -13,7 +13,7 @@ table {
   /* margin: 150px auto; */ /* Margen superior e inferior, centrado horizontalmente */
   margin-top: 100px;
   margin-bottom: 150px;
-  margin-left: 150px;
+  margin-left: 140px;
   margin-right: 100px;
   max-width: 100%; /* Permitir que la tabla no exceda el ancho de la pantalla */
   overflow-y: auto; /* Habilita el desplazamiento vertical */
@@ -103,4 +103,22 @@ th {
   #g-a {
     font-size: 11px; /* Ajustar el tamaño del texto de la dirección */
   }
+}
+
+/* esto es la parte final de la firmas  */
+.contenedor-flex {
+  display: flex;
+  justify-content: space-between; /* Distribuye los elementos horizontalmente */
+  height: 200px; /* Ajusta la altura del contenedor */
+  align-items: stretch; /* Asegura que las columnas se estiren verticalmente */
+}
+
+.columna {
+  width: 25%; /* Cada columna ocupa el 25% del espacio */
+  background-color: lightblue; /* Color de fondo para visualizar las columnas */
+  padding: 10px; /* Espacio interno */
+  display: flex; /* Necesario para alinear contenido verticalmente */
+  flex-direction: column; /* Alinea el contenido verticalmente */
+  justify-content: center; /* Centra el contenido verticalmente */
+  border: 1px solid red; /* Agrega un borde rojo para visualizar las líneas */
 }
