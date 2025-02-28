@@ -8,12 +8,6 @@
   border-radius: 0; /* Quitar las curvas redondeadas */
 }
 
-.custom-container {
-  max-width: 2000px; /* Ajusta el ancho máximo según sea necesario */
-  width: 100%; /* Asegúrate de que ocupe el 100% del ancho disponible */
-  margin-left: 150px;
-  margin-right: 200px;
-}
 /* Media Queries para Responsividad */
 @media (max-width: 768px) {
   .sidenav {
