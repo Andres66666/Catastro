@@ -1,4 +1,5 @@
 /* Contenedor de la tabla */
+
 .tabla-contenedor {
   display: flex;
   justify-content: center;
@@ -106,19 +107,45 @@ th {
 }
 
 /* esto es la parte final de la firmas  */
-.contenedor-flex {
-  display: flex;
-  justify-content: space-between; /* Distribuye los elementos horizontalmente */
-  height: 200px; /* Ajusta la altura del contenedor */
-  align-items: stretch; /* Asegura que las columnas se estiren verticalmente */
+.td-firmas {
+  height: 200px; /* Altura del td */
 }
 
-.columna {
-  width: 25%; /* Cada columna ocupa el 25% del espacio */
-  background-color: lightblue; /* Color de fondo para visualizar las columnas */
-  padding: 10px; /* Espacio interno */
-  display: flex; /* Necesario para alinear contenido verticalmente */
-  flex-direction: column; /* Alinea el contenido verticalmente */
-  justify-content: center; /* Centra el contenido verticalmente */
-  border: 1px solid red; /* Agrega un borde rojo para visualizar las líneas */
+/* esto la seccion de las imgagenes  */
+.contenedor-diagonal {
+  position: relative;
+  height: 100%; /* Ajusta según sea necesario */
+  width: 100%; /* Ajusta según sea necesario */
+}
+
+.div-extremo {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  position: absolute;
+  width: 30%; /* Tamaño de los div de los extremos */
+  height: 350px; /* Ajusta según sea necesario */
+}
+
+.div-extremo.izquierda {
+  top: 0;
+  left: 0;
+}
+
+.div-extremo.derecha {
+  position: absolute; /* Si necesitas que esté en una posición fija */
+  bottom: 0;
+  right: 0;
+  border: 1px solid black; /* Agrega solo el borde */
+  background-color: transparent; /* Elimina el fondo de color */
+}
+
+.div-medio {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; /* Ocupa el 60% del espacio */
+  height: 1000px; /* Ajusta según sea necesario */
+  background-color: lightgreen; /* Color de fondo para visualizar */
 }
