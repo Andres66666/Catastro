@@ -8,7 +8,7 @@
 
 /* Tabla */
 table {
-  margin-top: 10px;
+  margin-top: 50px;
   margin-bottom: 150px;
   background-color: white;
   width: 100%; /* Asegúrate de que la tabla ocupe el 100% del ancho del contenedor */
@@ -146,7 +146,75 @@ td img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%; /* Ocupa el 60% del espacio */
-  height: 1000px; /* Ajusta según sea necesario */
-  background-color: lightgreen; /* Color de fondo para visualizar */
+  width: 100%;
+  height: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagen-centrada {
+  width: calc(95% - 90px); /* Se reduce un poco menos */
+  height: calc(95% - 90px);
+  object-fit: contain; /* Mantiene la proporción de la imagen */
+}
+/* *********************** */
+/* esto es para los input  */
+/* *********************** */
+
+/* Estilo para la celda */
+.input-cell {
+  padding: 0; /* Elimina el padding */
+  margin: 0; /* Elimina el margen */
+  height: 40px; /* Ajusta la altura según sea necesario */
+}
+
+/* Estilo para el input */
+.full-width-input {
+  width: 100%; /* Ocupa todo el ancho del td */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+  border: none; /* Sin borde */
+  background-color: transparent; /* Fondo transparente */
+  height: 100%; /* Ocupa toda la altura del td */
+  margin: 0; /* Elimina el margen */
+}
+
+/* Ocultar flechas en inputs de tipo number */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Opcional: Si deseas eliminar el margen en Firefox */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* Eliminar margen */
+}
+
+/* Estilo para inputs de tipo texto */
+input[type="text"] {
+  -webkit-appearance: none; /* Para Chrome y Safari */
+  -moz-appearance: textfield; /* Para Firefox */
+  appearance: none; /* Propiedad estándar */
+}
+
+/* estos son los CSS para el boton de guardar */
+.floating-buttons {
+  position: fixed;
+  bottom: 20px; /* Ajusta la distancia desde la parte inferior */
+  left: 50%;
+  transform: translateX(-50%); /* Centra los botones horizontalmente */
+  display: flex;
+  gap: 30px; /* Aumenta la separación entre botones */
+  z-index: 1000; /* Asegura que estén sobre otros elementos */
+}
+
+/* Estilos para los botones */
+.floating-buttons button {
+  font-size: 18px; /* Aumenta el tamaño del texto */
+  padding: 15px 30px; /* Aumenta el tamaño del botón */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para resaltar */
 }

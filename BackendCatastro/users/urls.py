@@ -5,6 +5,8 @@ from rest_framework.routers import DefaultRouter
 from .views import (
     LoginView,
     PermisosViewSet,
+    PropietarioCreateViewSet,
+    
     RolesViewSet,
     UsuariosViewSet,
     UsuariosRolesViewSet,
@@ -18,6 +20,7 @@ router.register(r'roles', RolesViewSet)
 router.register(r'usuarios', UsuariosViewSet)
 router.register(r'usuariosroles', UsuariosRolesViewSet)
 router.register(r'rolespermisos', RolesPermisosViewSet)
+router.register(r'propietarios', PropietarioCreateViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),  # Incluye las rutas generadas por el router

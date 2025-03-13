@@ -59,3 +59,19 @@ class RolesPermisos(models.Model):
         unique_together = ('rol', 'permiso')
     def __str__(self):
         return f'{self.rol} {self.permiso} '
+
+""" esto es la seccion del registro de catastro  """
+
+
+class Propietario(models.Model):
+    apellido_paterno = models.CharField(max_length=100)
+    apellido_materno = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100)
+    porcentaje = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)  # Para el campo %
+    tipo_documento = models.CharField(max_length=10)  # CI, NIT, etc.
+    numero_documento = models.CharField(max_length=50)
+    numero_inmueble = models.IntegerField()
+    padron_municipal = models.CharField(max_length=50, null=True, blank=True)  # Para el campo PADRON MUNICIPAL (PMC)
+
+    def __str__(self):
+        return f"{self.nombre} {self.apellido_paterno} {self.apellido_materno}"

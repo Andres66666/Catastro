@@ -1,4 +1,5 @@
 
+from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -9,8 +10,8 @@ from django.contrib.auth.hashers import check_password
 
 
 
-from .models import  Permisos, Roles,  Usuarios, RolesPermisos, UsuariosRoles
-from .serializers import PermisosSerializer, RolSerializer, RolesPermisosSerializer, UsuarioSerializer, LoginSerializer, UsuariosRolesSerializer
+from .models import  Permisos, Propietario, Roles,  Usuarios, RolesPermisos, UsuariosRoles
+from .serializers import PermisosSerializer, PropietarioSerializer, RolSerializer, RolesPermisosSerializer, UsuarioSerializer, LoginSerializer, UsuariosRolesSerializer
 
 
 # Create your views here.
@@ -171,6 +172,7 @@ class UsuariosRolesViewSet(viewsets.ModelViewSet):
 # ViewSet for RolesPermisos
 
 class RolesPermisosViewSet(viewsets.ModelViewSet):
+
     queryset = RolesPermisos.objects.all()
     serializer_class = RolesPermisosSerializer
 
@@ -201,4 +203,24 @@ class RolesPermisosViewSet(viewsets.ModelViewSet):
         instance.save()
 
         serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+
+""" esto es la seccion del registro de catastro  """
+class PropietarioCreateViewSet(viewsets.ModelViewSet):
+    queryset = Propietario.objects.all()
+    serializer_class = PropietarioSerializer
+
+    def create(self, request, *args, **kwargs):
+        # Extraer datos del request
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)  # Valida los datos
+        self.perform_create(serializer)  # Guarda el nuevo propietario
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, pk=None):
+        instance = self.get_object()  # Obtiene la instancia del propietario a actualizar
+        serializer = self.get_serializer(instance, data=request.data, partial=True)  # Permite actualizaciones parciales
+        serializer.is_valid(raise_exception=True)  # Valida los datos
+        self.perform_update(serializer)  # Actualiza el propietario
         return Response(serializer.data)
