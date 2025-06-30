@@ -1,24 +1,90 @@
-.sidenav-container {
-  height: 100%;
+/* Layout general */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar fijo en la parte superior */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  height: 56px;
+  /* Altura estándar de navbar */
+}
+
+/* Sidebar debajo del navbar */
+.leftSide {
+  position: fixed;
+  top: 56px;
+  /* Debajo del navbar */
+  left: 0;
+  height: calc(100vh - 56px);
+  width: 250px;
+  background-color: #f8f9fa;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1020;
+  overflow-y: auto;
+}
+
+/* Estados del sidebar */
+.sidebar-open {
+  transform: translateX(0);
+}
+
+.sidebar-closed {
+  transform: translateX(-100%);
+}
+
+/* Contenido principal */
+.main-content {
+  margin-top: 56px;
+  /* Compensa el navbar */
+  flex: 1;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.content-shifted {
+  margin-left: 250px;
+}
+
+/* Overlay para móvil */
+.overlay {
+  position: fixed;
+  top: 56px;
+  left: 0;
   width: 100%;
+  height: calc(100% - 56px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1019;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s,
+    visibility 0.3s;
 }
 
-.sidenav {
-  width: 300px;
-  border-radius: 0; /* Quitar las curvas redondeadas */
+.overlay-visible {
+  opacity: 1;
+  visibility: visible;
 }
 
-/* Media Queries para Responsividad */
-@media (max-width: 768px) {
-  .sidenav {
-    position: fixed; /* Fijar el sidenav en la parte izquierda */
-    z-index: 2; /* Asegurarse de que esté por encima del contenido */
-    height: 100%; /* Asegurarse de que ocupe toda la altura */
+/* Responsive para desktop */
+@media (min-width: 768px) {
+  .leftSide {
+    transform: translateX(0);
   }
 
-  .mat-toolbar.mat-primary {
-    position: fixed; /* Fijar la barra de herramientas en la parte superior */
-    width: 100%; /* Asegurarse de que ocupe todo el ancho */
-    z-index: 3; /* Asegurarse de que esté por encima del sidenav */
+  .sidebar-closed {
+    transform: translateX(-250px);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .content-shifted {
+    margin-left: 250px;
   }
 }

@@ -16,14 +16,14 @@ from .serializers import PermisosSerializer, PropietarioSerializer, RolSerialize
 
 # Create your views here.
 # backend
+
 class LoginView(APIView):
-    authentication_classes = []  # Elimina autenticación solo para login
-    permission_classes = []      # Deja vacía la lista de permisos
+    authentication_classes = []
+    permission_classes = []
 
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
 
-        # Validación del formulario de login
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -33,47 +33,40 @@ class LoginView(APIView):
         try:
             usuario = Usuarios.objects.prefetch_related(
                 Prefetch('usuariosroles_set', queryset=UsuariosRoles.objects.select_related('rol')),
-                Prefetch('usuariosroles_set__rol__rolespermisos_set', queryset=RolesPermisos.objects.select_related('permiso'))
             ).get(correo=correo)
 
-            # Verificación de estado del usuario
             if not usuario.estado_Usuario:
-                return Response({
-                    'error': 'No puedes iniciar sesión!!!. Comuníquese con el administrador. Gracias.'
-                }, status=status.HTTP_403_FORBIDDEN)
+                return Response({'error': 'No puedes iniciar sesión. Comuníquese con el administrador.'}, status=status.HTTP_403_FORBIDDEN)
 
-            # Verificar la contraseña
             if not check_password(password, usuario.password):
                 return Response({'error': 'Credenciales incorrectas'}, status=status.HTTP_400_BAD_REQUEST)
 
-            # Generación del token JWT
             refresh = RefreshToken.for_user(usuario)
             access_token = str(refresh.access_token)
 
-            # Obtener roles y permisos
-            roles = [usuario_rol.rol.nombre_rol for usuario_rol in usuario.usuariosroles_set.all()]
-            permisos = []
-            for usuario_rol in usuario.usuariosroles_set.all():
-                permisos += [rol_permiso.permiso.nombre_permiso for rol_permiso in usuario_rol.rol.rolespermisos_set.all()]
+            # Obtener roles
+            roles = [ur.rol.nombre_rol for ur in usuario.usuariosroles_set.all()]
 
-            # Verificar si el usuario tiene roles y permisos
+            # Obtener permisos de todos los roles
+            permisos = []
+            for ur in usuario.usuariosroles_set.all():
+                rol = ur.rol
+                permisos += [rp.permiso.nombre_permiso for rp in RolesPermisos.objects.filter(rol=rol)]
+
             if not roles or not permisos:
                 return Response({'error': 'El usuario no tiene roles ni permisos asignados.'}, status=status.HTTP_403_FORBIDDEN)
 
-            # Respuesta de éxito
             return Response({
                 'access_token': access_token,
                 'roles': roles,
                 'permisos': permisos,
-                'nombre_usuario': usuario.nombre_usuario,  # Agregar nombre de usuario
-                'apellido': usuario.apellido,              # Agregar apellido
-                'imagen_url': usuario.imagen_url,            # Agregar URL de la imagen
+                'nombre_usuario': usuario.nombre_usuario,
+                'apellido': usuario.apellido,
                 'usuario_id': usuario.id
             }, status=status.HTTP_200_OK)
 
         except Usuarios.DoesNotExist:
             return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
-
 
 
 

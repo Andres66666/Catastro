@@ -9,17 +9,14 @@ import { Propietario } from '../models/models';
 })
 export class ServiceService {
   private apiUrl = 'http://localhost:8000/api/';
-  /* esto para manejo de errores en Windowes  */
-  private windowWidthSubject = new BehaviorSubject<number>(0);
-  windowWidth$ = this.windowWidthSubject.asObservable();
-  constructor(private http: HttpClient, private router: Router) {
-    if (typeof window !== 'undefined') {
-      this.windowWidthSubject.next(window.innerWidth);
-      window.addEventListener('resize', () => {
-        this.windowWidthSubject.next(window.innerWidth);
-      });
-    }
+  constructor(private http: HttpClient) { }
+
+  /* servicio de login */
+  login(correo: string, password: string): Observable<any> {
+  const loginData = { correo: correo, password: password };
+    return this.http.post<any>(`${this.apiUrl}login/`, loginData);
   }
+  
   getPropietarios(): Observable<Propietario[]> {
     return this.http.get<Propietario[]>(`${this.apiUrl}propietarios/`);
   }

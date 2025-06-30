@@ -1,72 +1,289 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    #drawer
-    class="sidenav align-items: center"
-    fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
-    style="background-color: rgb(88, 214, 141)"
+<section class="layout">
+  <!-- Navbar (header) -->
+  <nav class="navbar navbar-expand-md header bg-light">
+    <div class="container-fluid mx-2">
+      <button class="toggle-button btn me-2" (click)="toggleSidebar()">
+        <i [ngClass]="isSidebarOpen ? 'fas fa-times' : 'fas fa-bars'"></i>
+      </button>
+      <div class="ms-auto d-flex align-items-center gap-2">
+        <div class="dropdown d-flex align-items-center">
+          <div class="me-2">
+            <img
+              *ngIf="imagenUrl"
+              [src]="imagenUrl"
+              alt="Foto de usuario"
+              class="rounded-circle img-fluid"
+              style="width: 40px; height: 40px"
+            />
+          </div>
+
+          <button
+            class="btn btn-secondary dropdown-toggle d-flex align-items-center"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ userName }}
+          </button>
+
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="dropdownMenuButton"
+          >
+            <li>
+              <div
+                class="dropdown-item d-flex align-items-center"
+                (click)="verPerfil()"
+              >
+                <i class="fas fa-user-circle me-2"></i>
+                <span>Ver Perfil</span>
+              </div>
+            </li>
+            <li>
+              <div
+                class="dropdown-item text-danger d-flex align-items-center"
+                (click)="onSelectChange('cerrarSesion')"
+              >
+                <i class="fas fa-power-off text-danger fs-6 me-2"></i>
+                <span> Cerrar Sesión</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar (leftSide) -->
+  <aside
+    class="leftSide bg-light p-3"
+    [class.sidebar-open]="isSidebarOpen"
+    [class.sidebar-closed]="!isSidebarOpen"
   >
-    <div class="text-center mt-2 mb-2">
-      <img
-        src="https://www.thesprucepets.com/thmb/VDro2rx3m2WWj7h6Y6Cf3YA1nb0=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/AleksandrZotovAmericanBulldog-c717bec4805c43fab4c61f91da5f9d93.jpg"
-        alt="Foto de usuario"
-        class="rounded-circle img-fluid mb-3"
-        style="width: 150px; height: 150px"
-      />
+    <div class="mb-3">
+      <div class="d-flex justify-content-center align-items-center">
+        <img
+          src="assets/LogoBarracaTransparente.png"
+          alt=""
+          style="max-width: 80px"
+        />
+      </div>
+
+      <hr class="text-dark" />
+      <p class="text-dark mb-0">Nombre: {{ userName }}</p>
+      <p class="text-dark">Rol: {{ userRole }}</p>
+
+      <hr class="text-dark" />
     </div>
-    <div class="container mt-5">
-      <div class="px-2">
-        <p><strong>Nombre:</strong> Juan Pérez Mamani</p>
-        <p><strong>Rol:</strong> Admin</p>
-      </div>
+
+    <ul class="list-group">
+      <li class="d-flex align-items-center">
+        <div class="col-auto pe-2">
+          <i class="bi bi-boxes fs-2 text-dark"></i>
+        </div>
+        <div class="col text-start">
+          <a
+            routerLink="/panelControl/servicios"
+            class="text-dark text-decoration-none"
+            (click)="closeSidebarOnMobile()"
+          >
+            servicios
+          </a>
+        </div>
+      </li>
+      <!-- Gestión de Usuarios -->
+      <li
+        class="d-flex align-items-center"
+        (click)="toggleSection('GestióndeUsuarios')"
+        style="cursor: pointer"
+      >
+        <div class="col-auto pe-2">
+          <i class="bi bi-people fs-2 text-dark"></i>
+        </div>
+        <div class="col text-start">
+          <span class="text-dark">Gestión de Usuarios</span>
+        </div>
+        <div class="col-auto pe-2">
+          <i
+            class="bi"
+            [ngClass]="
+              isActive('GestionDeUsuarios')
+                ? 'bi-chevron-down'
+                : 'bi-chevron-right'
+            "
+            class="text-dark"
+          ></i>
+        </div>
+      </li>
+      <ul class="list-group ps-3" *ngIf="isActive('GestióndeUsuarios')">
+        <li class="d-flex align-items-center">
+          <div class="col-auto pe-2">
+            <i class="bi bi-shield-lock fs-2 text-dark"></i>
+          </div>
+          <div class="col text-start">
+            <a
+              routerLink="/panelControl/listar-rol"
+              class="text-dark text-decoration-none"
+              (click)="closeSidebarOnMobile()"
+              >Rol</a
+            >
+          </div>
+        </li>
+        <li class="d-flex align-items-center">
+          <div class="col-auto pe-2">
+            <i class="bi bi-key fs-2 text-dark"></i>
+          </div>
+          <div class="col text-start">
+            <a
+              routerLink="/panelControl/listar-permiso"
+              class="text-dark text-decoration-none"
+              (click)="closeSidebarOnMobile()"
+              >Permiso</a
+            >
+          </div>
+        </li>
+        <li class="d-flex align-items-center">
+          <div class="col-auto pe-2">
+            <i class="bi bi-person-badge fs-2 text-dark"></i>
+          </div>
+          <div class="col text-start">
+            <a
+              routerLink="/panelControl/listar-usuario"
+              class="text-dark text-decoration-none"
+              (click)="closeSidebarOnMobile()"
+              >Usuarios</a
+            >
+          </div>
+        </li>
+        <li class="d-flex align-items-center">
+          <div class="col-auto pe-2">
+            <i class="bi bi-person-lines-fill fs-2 text-dark"></i>
+          </div>
+          <div class="col text-start">
+            <a
+              routerLink="/panelControl/listar-usuario-rol"
+              class="text-dark text-decoration-none"
+              (click)="closeSidebarOnMobile()"
+              >Usuario Rol</a
+            >
+          </div>
+        </li>
+        <li class="d-flex align-items-center">
+          <div class="col-auto pe-2">
+            <i class="bi bi-shield-check fs-2 text-dark"></i>
+          </div>
+          <div class="col text-start">
+            <a
+              routerLink="/panelControl/listar-rol-permiso"
+              class="text-dark text-decoration-none"
+              (click)="closeSidebarOnMobile()"
+              >Rol Permiso</a
+            >
+          </div>
+        </li>
+      </ul>
+      <!-- Gestión de Catastro-->
+      <li
+        class="d-flex align-items-center"
+        (click)="toggleSection('Catastro')"
+        style="cursor: pointer"
+      >
+        <div class="col-auto pe-2">
+          <i class="bi bi-calculator fs-2 text-dark"></i>
+          <!-- icono actualizado -->
+        </div>
+        <div class="col text-start">
+          <span class="text-dark">Catastroes</span>
+        </div>
+        <div class="col-auto pe-2">
+          <i
+            class="bi"
+            [ngClass]="
+              isActive('Catastro') ? 'bi-chevron-down' : 'bi-chevron-right'
+            "
+            class="text-dark"
+          ></i>
+        </div>
+      </li>
+
+      <ul class="list-group ps-3" *ngIf="isActive('Catastro')">
+        <!-- Item: Registrar Catastro -->
+        <li class="d-flex align-items-center">
+          <div class="col-auto pe-2">
+            <i class="bi bi-plus-square fs-2 text-dark"></i>
+          </div>
+          <div class="col text-start">
+            <a
+              routerLink="/panelControl/registrar-catastro"
+              class="text-dark text-decoration-none"
+              (click)="closeSidebarOnMobile()"
+              >Registrar Catastro</a
+            >
+          </div>
+        </li>
+
+        <!-- Item: Listar Catastro -->
+        <li class="d-flex align-items-center">
+          <div class="col-auto pe-2">
+            <i class="bi bi-list-task fs-2 text-dark"></i>
+          </div>
+          <div class="col text-start">
+            <a
+              routerLink="/panelControl/listar-catastro"
+              class="text-dark text-decoration-none"
+              (click)="closeSidebarOnMobile()"
+              >Listar Catastro</a
+            >
+          </div>
+        </li>
+
+        <!-- Item: Ver Catastro -->
+        <li class="d-flex align-items-center">
+          <div class="col-auto pe-2">
+            <i class="bi bi-eye fs-2 text-dark"></i>
+          </div>
+          <div class="col text-start">
+            <a
+              routerLink="/panelControl/ver-catastro/1"
+              class="text-dark text-decoration-none"
+              (click)="closeSidebarOnMobile()"
+              >Ver Catastro</a
+            >
+          </div>
+        </li>
+
+        <!-- Item: Editar Catastro -->
+        <li class="d-flex align-items-center">
+          <div class="col-auto pe-2">
+            <i class="bi bi-pencil-square fs-2 text-dark"></i>
+          </div>
+          <div class="col text-start">
+            <a
+              routerLink="/panelControl/editar-catastro/1"
+              class="text-dark text-decoration-none"
+              (click)="closeSidebarOnMobile()"
+              >Editar Catastro</a
+            >
+          </div>
+        </li>
+      </ul>
+    </ul>
+  </aside>
+  <!-- Overlay para móvil -->
+  <div
+    class="overlay"
+    *ngIf="windowWidth < 768"
+    [class.overlay-visible]="isSidebarOpen"
+    (click)="toggleSidebar()"
+  ></div>
+  <!-- Contenido principal (body) -->
+  <main
+    class="main-content"
+    [class.content-shifted]="isSidebarOpen && windowWidth >= 768"
+  >
+    <div class="p-2">
+      <router-outlet></router-outlet>
     </div>
-
-    <hr />
-    <mat-nav-list>
-      <a mat-list-item routerLink="registrar-catastro">Registrar Catastro</a>
-      <a mat-list-item routerLink="listar-catastro">Listar Catastro</a>
-      <a mat-list-item routerLink="ver-catastro/1">Ver Catastro</a>
-      <a mat-list-item routerLink="editar-catastro/1">Editar Catastro</a>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-    <mat-toolbar
-      color="primary"
-      style="
-        background-color: rgb(88, 214, 141);
-        justify-content: space-between;
-      "
-    >
-      <div class="text-start">
-        <button
-          *ngIf="isHandset$ | async"
-          mat-icon-button
-          (click)="drawer.toggle()"
-        >
-          <mat-icon>menu</mat-icon>
-        </button>
-      </div>
-
-      <div class="d-flex text-start">
-        <button class="btn btn-link">
-          <i class="fas fa-bell"></i>
-        </button>
-        <button class="btn btn-link">
-          <i class="fas fa-envelope"></i>
-        </button>
-        <button class="btn btn-link">
-          <i class="fas fa-cog"></i>
-        </button>
-      </div>
-    </mat-toolbar>
-
-    <!-- Aquí se renderizarán los componentes de las rutas -->
-    <div
-      class="container d-flex justify-content-center align-items-center custom-container"
-    ></div>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </main>
+</section>

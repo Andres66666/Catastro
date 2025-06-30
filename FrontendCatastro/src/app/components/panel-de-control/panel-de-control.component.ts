@@ -1,44 +1,168 @@
-import { Component, inject } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AsyncPipe, CommonModule } from '@angular/common';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { RouterModule } from '@angular/router';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import {
+  Component,
+  HostListener,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { StorageService } from '../../services/Storage.service';
 
 @Component({
   selector: 'app-panel-de-control',
   templateUrl: './panel-de-control.component.html',
   styleUrls: ['./panel-de-control.component.css'],
   standalone: true,
-  imports: [
-    CommonModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatCardModule,
-    MatMenuModule,
-    MatGridListModule,
-    AsyncPipe,
-    RouterModule
-  ],
+  imports: [CommonModule, RouterModule],
 })
-export class PanelDeControlComponent {
-  private breakpointObserver = inject(BreakpointObserver);
+export class PanelDeControlComponent implements OnInit {
+  activeSection: string | null = null;
+  isMobileView = false;
+  isSidebarVisibleOnSmallScreens = true;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
+  timeoutInactivity: any;
+  inactiveTime = 60 * 60 * 1000; // 1 hora
+  isSidebarOpen = false;
+  windowWidth: number = 0;
+
+  userRole: string = '';
+  userName: string = '';
+  userPermissions: string[] = [];
+
+  nombre_usuario: string = '';
+  apellido: string | null = '';
+  imagenUrl: string | null = '';
+  usuario_id: number = 0;
+
+  idParaEditar: number = 0;
+
+  permisos: string[] = [];
+  roles: string[] = [];
+
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private storageService: StorageService,
+  ) {}
+
+  ngOnInit(): void {
+    const usuarioStr = this.storageService.getItem('usuarioLogueado');
+    const datosUsuario = usuarioStr ? JSON.parse(usuarioStr) : {};
+
+    this.userRole = datosUsuario.roles || '';
+    this.userName =
+      `${datosUsuario.nombre || ''} ${datosUsuario.apellido || ''}`.trim();
+    this.userPermissions = datosUsuario.permisos || [];
+    this.imagenUrl = datosUsuario.imagen_url;
+
+    this.checkScreenSize();
+    this.resetInactivityTimer();
+  }
+
+  puedeVer(permiso: string): boolean {
+    return this.userPermissions.includes(permiso);
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.windowWidth = window.innerWidth;
+      this.isSidebarOpen = this.windowWidth >= 768;
+    }
+  }
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleOutsideClick(event: MouseEvent) {
+    if (this.windowWidth >= 768) return;
+
+    const target = event.target as HTMLElement;
+    const clickedInsideSidebar = target.closest('.sidebar');
+    const clickedInsideToggleButton = target.closest('.toggle-button');
+
+    if (
+      !clickedInsideSidebar &&
+      !clickedInsideToggleButton &&
+      this.isSidebarOpen
+    ) {
+      this.isSidebarOpen = false;
+    }
+  }
+
+  toggleSection(section: string) {
+    this.activeSection = this.activeSection === section ? null : section;
+  }
+
+  isActive(section: string) {
+    return this.activeSection === section;
+  }
+
+  closeSidebarOnMobile() {
+    if (this.isMobileView) {
+      this.isSidebarVisibleOnSmallScreens = false;
+    }
+  }
+
+  @HostListener('document:mousemove')
+  @HostListener('document:keydown')
+  @HostListener('document:click')
+  handleUserActivity() {
+    this.resetInactivityTimer();
+  }
+
+  resetInactivityTimer() {
+    if (this.timeoutInactivity) {
+      clearTimeout(this.timeoutInactivity);
+    }
+
+    this.timeoutInactivity = setTimeout(() => {
+      this.handleSessionTimeout();
+    }, this.inactiveTime);
+  }
+
+  handleSessionTimeout() {
+    alert('Sesión cerrada por inactividad');
+    this.storageService.clear();
+    this.router.navigate(['/index']);
+  }
+
+  verPerfil(): void {
+    this.router.navigate(['panel-control/perfil']);
+  }
+
+  private getUsuarioLocalStorage() {
+    const usuarioStr = this.storageService.getItem('usuario');
+    return usuarioStr ? JSON.parse(usuarioStr) : null;
+  }
+
+  onSelectChange(action: string) {
+    if (action === 'cerrarSesion') {
+      this.confirmarCerrarSesion();
+    }
+  }
+
+  confirmarCerrarSesion() {
+    console.log('Intentando cerrar sesión...');
+    const confirmar = window.confirm(
+      '¿Está seguro de que desea cerrar sesión?',
     );
+    if (confirmar) {
+      this.logout();
+    } else {
+      console.log('Cierre de sesión cancelado.');
+    }
+  }
+
+  logout() {
+    this.storageService.clear();
+    this.router.navigate(['/index']);
+  }
 }

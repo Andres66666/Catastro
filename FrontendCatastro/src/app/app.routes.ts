@@ -6,6 +6,7 @@ import { RegistrarCatastroComponent } from './components/Catastro/registrar-cata
 import { ListarCatastroComponent } from './components/Catastro/listar-catastro/listar-catastro.component';
 import { VerCatastroComponent } from './components/Catastro/ver-catastro/ver-catastro.component';
 import { ActualizarCatastroComponent } from './components/Catastro/actualizar-catastro/actualizar-catastro.component';
+import { authGuard } from './guards/auth.guard';
 export const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'index', component: IndexComponent },
@@ -13,6 +14,7 @@ export const routes: Routes = [
   {
     path: 'panelControl',
     component: PanelDeControlComponent,
+    canActivate: [authGuard],
     children: [
       { path: 'registrar-catastro', component: RegistrarCatastroComponent },
       { path: 'listar-catastro', component: ListarCatastroComponent },
@@ -21,5 +23,4 @@ export const routes: Routes = [
       { path: '', redirectTo: 'listar-catastro', pathMatch: 'full' }, // Redirige a listar-catastro por defecto
     ],
   },
-  { path: '**', redirectTo: '/panelControl' }, // Redirige cualquier ruta no encontrada al panel de control
 ];
