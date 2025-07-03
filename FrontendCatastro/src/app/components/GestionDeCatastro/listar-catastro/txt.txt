@@ -1,0 +1,100 @@
+import { Component, OnInit } from '@angular/core';
+import { Propietario } from '../../../models/models';
+import { ServiceService } from '../../../services/service.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-listar-catastro',
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  templateUrl: './listar-catastro.component.html',
+  styleUrl: './listar-catastro.component.css',
+})
+export class ListarCatastroComponent implements OnInit {
+  propietarios: Propietario[] = [];
+  inmueblesUnicos: Propietario[] = [];
+  propietariosData: Propietario[] = []; // Usado en los registros
+  mostrandoDetalles: boolean = false;
+  inmuebleSeleccionado: number | null = null;
+
+  filtroId: string = '';
+  filtroNombre: string = '';
+  inmueblesFiltrados: Propietario[] = [];
+
+  constructor(private service: ServiceService) {}
+
+  ngOnInit() {
+    this.service.getPropietarios().subscribe((data) => {
+      this.propietarios = data;
+
+      // Agrupar por inmueble.id
+      const gruposMap = new Map<number, Propietario>();
+      this.propietarios.forEach((prop) => {
+        if (!gruposMap.has(prop.inmueble.id)) {
+          gruposMap.set(prop.inmueble.id, prop);
+        }
+      });
+      this.inmueblesUnicos = Array.from(gruposMap.values());
+      this.inmueblesFiltrados = this.inmueblesUnicos;
+    });
+  }
+
+  verDetalles(inmuebleId: number) {
+    this.propietariosData = this.propietarios
+      .filter((p) => p.inmueble.id === inmuebleId)
+      .slice(0, 4); // Asegura que solo 4 se llenen
+
+    // Rellenar hasta 4 registros con datos vacíos si hay menos
+    while (this.propietariosData.length < 4) {
+      this.propietariosData.push({
+        id: 0,
+        apellido_paterno: '',
+        apellido_materno: '',
+        nombre: '',
+        porcentaje: 0,
+        tipo_documento: '',
+        numero_documento: '',
+        inmueble: { id: inmuebleId, numero_inmueble: 0, padron_municipal: '' },
+      });
+    }
+
+    const inmueble = this.propietariosData[0]?.inmueble;
+    this.inmuebleSeleccionado = inmueble?.id || null;
+    this.numero_inmueble = inmueble?.numero_inmueble || 0;
+    this.padron_municipal = inmueble?.padron_municipal || '';
+
+    this.mostrandoDetalles = true;
+  }
+
+  cerrarDetalles() {
+    this.mostrandoDetalles = false;
+    this.inmuebleSeleccionado = null;
+    this.propietariosData = [];
+  }
+
+  buscar() {
+    const id = this.filtroId.trim();
+    const nombre = this.filtroNombre.trim().toLowerCase();
+
+    this.inmueblesFiltrados = this.inmueblesUnicos.filter((inmueble) => {
+      const matchId = id ? inmueble.inmueble.id.toString().includes(id) : true;
+      const matchNombre = nombre
+        ? `${inmueble.nombre} ${inmueble.apellido_paterno}`
+            .toLowerCase()
+            .includes(nombre)
+        : true;
+      return matchId && matchNombre;
+    });
+  }
+
+  limpiarFiltros() {
+    this.filtroId = '';
+    this.filtroNombre = '';
+    this.inmueblesFiltrados = this.inmueblesUnicos;
+  }
+
+  // Agrega estas 2 variables si no las tenías en el componente
+  numero_inmueble: number = 0;
+  padron_municipal: string = '';
+}

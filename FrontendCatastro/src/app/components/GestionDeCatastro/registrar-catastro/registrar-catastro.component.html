@@ -25,6 +25,7 @@
             (Uso Exclusivo de Catastro)
           </td>
         </tr>
+        <!-- SECCION 1 -->
         <tr>
           <td rowspan="5" class="vertical-text">PROPIETARIO (S)</td>
           <td colspan="4" class="single-line">APELLIDO PATERNO</td>
@@ -36,47 +37,52 @@
           <td colspan="3" class="single-line mid">Nº DOCUMENTO</td>
           <td colspan="3" class="single-line mid px-3">NUMERO DE INMUEBLE</td>
         </tr>
+        <!-- REGISTRO 1 -->
         <tr>
           <td colspan="4" class="input-cell">
             <input
               type="text"
               class="full-width-input"
-              [(ngModel)]="propietarioData.apellido_paterno"
-              name="apellidoPaterno"
+              [(ngModel)]="propietariosData[0].apellido_paterno"
+              name="apellidoPaterno_0"
               required
+              placeholder="Apellido Paterno"
             />
           </td>
           <td colspan="5" class="input-cell">
             <input
               type="text"
               class="full-width-input"
-              [(ngModel)]="propietarioData.apellido_materno"
-              name="apellidoMaterno"
+              [(ngModel)]="propietariosData[0].apellido_materno"
+              name="apellidoMaterno_0"
               required
+              placeholder="Apellido Materno"
             />
           </td>
           <td colspan="5" class="input-cell">
             <input
               type="text"
               class="full-width-input"
-              [(ngModel)]="propietarioData.nombre"
-              name="nombre"
+              [(ngModel)]="propietariosData[0].nombre"
+              name="nombre_0"
               required
+              placeholder="Nombre(s) del propietario"
             />
           </td>
           <td class="input-cell">
             <input
               type="number"
               class="full-width-input mid"
-              [(ngModel)]="propietarioData.porcentaje"
-              name="porcentaje"
+              [(ngModel)]="propietariosData[0].porcentaje"
+              name="porcentaje_0"
+              placeholder="0"
             />
           </td>
           <td colspan="2" class="input-cell">
             <select
               class="full-width-input mid"
-              [(ngModel)]="propietarioData.tipo_documento"
-              name="tipoDocumento"
+              [(ngModel)]="propietariosData[0].tipo_documento"
+              name="tipoDocumento_0"
               required
             >
               <option value=""></option>
@@ -88,35 +94,70 @@
             <input
               type="text"
               class="full-width-input mid"
-              [(ngModel)]="propietarioData.numero_documento"
-              name="numeroDocumento"
+              [(ngModel)]="propietariosData[0].numero_documento"
+              name="numeroDocumento_0"
+              placeholder="0"
             />
           </td>
           <td colspan="3" class="input-cell">
             <input
               type="number"
               class="full-width-input mid"
-              [(ngModel)]="propietarioData.numero_inmueble"
+              [(ngModel)]="numero_inmueble"
               name="numeroInmueble"
+              placeholder="0"
             />
           </td>
         </tr>
 
+        <!-- REGISTRO 2 -->
         <tr>
           <td colspan="4" class="input-cell">
-            <input type="text" class="full-width-input" />
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="propietariosData[1].apellido_paterno"
+              name="apellidoPaterno_1"
+              required
+              placeholder="Apellido Paterno"
+            />
           </td>
           <td colspan="5" class="input-cell">
-            <input type="text" class="full-width-input" />
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="propietariosData[1].apellido_materno"
+              name="apellidoMaterno_1"
+              required
+              placeholder="Apellido Materno"
+            />
           </td>
           <td colspan="5" class="input-cell">
-            <input type="text" class="full-width-input" />
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="propietariosData[1].nombre"
+              name="nombre_1"
+              required
+              placeholder="Nombre(s) del propietario"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              type="number"
+              class="full-width-input mid"
+              [(ngModel)]="propietariosData[1].porcentaje"
+              name="porcentaje_1"
+              placeholder="0"
+            />
           </td>
           <td colspan="2" class="input-cell">
-            <select class="full-width-input mid">
+            <select
+              class="full-width-input mid"
+              [(ngModel)]="propietariosData[1].tipo_documento"
+              name="tipoDocumento_1"
+              required
+            >
               <option value=""></option>
               <option value="CI">CI</option>
               <option value="NIT">NIT</option>
@@ -124,25 +165,65 @@
             </select>
           </td>
           <td colspan="3" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              [(ngModel)]="propietariosData[1].numero_documento"
+              name="numeroDocumento_1"
+              placeholder="0"
+            />
           </td>
           <td colspan="3" class="single-line mid">PADRON MUNICIPAL (PMC)</td>
         </tr>
+
+        <!-- REGISTRO 3 -->
         <tr>
           <td colspan="4" class="input-cell">
-            <input type="text" class="full-width-input" />
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="propietariosData[2].apellido_paterno"
+              name="apellidoPaterno_2"
+              required
+              placeholder="Apellido Paterno"
+            />
           </td>
           <td colspan="5" class="input-cell">
-            <input type="text" class="full-width-input" />
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="propietariosData[2].apellido_materno"
+              name="apellidoMaterno_2"
+              required
+              placeholder="Apellido Materno"
+            />
           </td>
           <td colspan="5" class="input-cell">
-            <input type="text" class="full-width-input" />
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="propietariosData[2].nombre"
+              name="nombre_2"
+              required
+              placeholder="Nombre(s) del propietario"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              type="number"
+              class="full-width-input mid"
+              [(ngModel)]="propietariosData[2].porcentaje"
+              name="porcentaje_2"
+              placeholder="0"
+            />
           </td>
           <td colspan="2" class="input-cell">
-            <select class="full-width-input mid">
+            <select
+              class="full-width-input mid"
+              [(ngModel)]="propietariosData[2].tipo_documento"
+              name="tipoDocumento_2"
+              required
+            >
               <option value=""></option>
               <option value="CI">CI</option>
               <option value="NIT">NIT</option>
@@ -150,33 +231,73 @@
             </select>
           </td>
           <td colspan="3" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              [(ngModel)]="propietariosData[2].numero_documento"
+              name="numeroDocumento_2"
+              placeholder="0"
+            />
           </td>
           <td colspan="3" rowspan="2" class="input-cell">
             <input
               type="number"
               class="full-width-input mid"
-              placeholder="0"
-              [(ngModel)]="propietarioData.padron_municipal"
+              [(ngModel)]="padron_municipal"
               name="padronMunicipal"
+              placeholder="0"
             />
           </td>
         </tr>
+
+        <!-- REGISTRO 4 -->
         <tr>
           <td colspan="4" class="input-cell">
-            <input type="text" class="full-width-input" />
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="propietariosData[3].apellido_paterno"
+              name="apellidoPaterno_3"
+              required
+              placeholder="Apellido Paterno"
+            />
           </td>
           <td colspan="5" class="input-cell">
-            <input type="text" class="full-width-input" />
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="propietariosData[3].apellido_materno"
+              name="apellidoMaterno_3"
+              required
+              placeholder="Apellido Materno"
+            />
           </td>
           <td colspan="5" class="input-cell">
-            <input type="text" class="full-width-input" />
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="propietariosData[3].nombre"
+              name="nombre_3"
+              required
+              placeholder="Nombre(s) del propietario"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              type="number"
+              class="full-width-input mid"
+              [(ngModel)]="propietariosData[3].porcentaje"
+              name="porcentaje_3"
+              placeholder="0"
+            />
           </td>
           <td colspan="2" class="input-cell">
-            <select class="full-width-input mid">
+            <select
+              class="full-width-input mid"
+              [(ngModel)]="propietariosData[3].tipo_documento"
+              name="tipoDocumento_3"
+              required
+            >
               <option value=""></option>
               <option value="CI">CI</option>
               <option value="NIT">NIT</option>
@@ -184,69 +305,155 @@
             </select>
           </td>
           <td colspan="3" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              [(ngModel)]="propietariosData[3].numero_documento"
+              name="numeroDocumento_3"
+              placeholder="0"
+            />
           </td>
         </tr>
+        <!-- SECCIÓN 2 -->
         <tr>
           <td colspan="2" rowspan="3">
             CLASIFICACION DEL <br />
             DERECHO PROPIETARIO
           </td>
-          <td colspan="7" class="single-line">NOMBRE DEL NOTARIO</td>
+          <td colspan="7" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="clasificacionesData[0].notario_juez"
+              name="notarioJuez_0"
+              list="notarioJuezOptions_0"
+              placeholder="Seleccione o escriba"
+            />
+            <datalist id="notarioJuezOptions_0">
+              <option value="Nombre del Notario"></option>
+              <option value="Nombre del Juez"></option>
+              <option value="Otro Notario"></option>
+            </datalist>
+          </td>
           <td colspan="3" class="single-line mid">FECHA DE INSCRIPCION</td>
           <td colspan="3" class="single-line mid">MATRICULA O PARTIDA</td>
           <td colspan="3" class="single-line mid">Nº DE TESTIMONIO</td>
           <td colspan="4" class="single-line mid">FECHA DE TESTIMONIO</td>
           <td colspan="2" class="single-line mid">SUPERFICIE</td>
         </tr>
+
+        <!-- REGISTRO 1 -->
         <tr>
           <td colspan="7" class="input-cell">
-            <select class="full-width-input">
-              <option value=""></option>
-              <option value="CI">CI</option>
-              <option value="NIT">NIT</option>
-              <option value="OTRO">OTRO</option>
-            </select>
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="clasificacionesData[0].nombre_notario_juez"
+              name="nombreNotarioJuez_0"
+              list="nombreNotarioOptions_0"
+              placeholder="Seleccione o escriba"
+            />
+            <datalist id="nombreNotarioOptions_0">
+              <option value="Nombre del Notario"></option>
+              <option value="Nombre del Juez"></option>
+              <option value="Otro Notario"></option>
+            </datalist>
           </td>
           <td colspan="3" class="input-cell">
-            <input type="date" class="full-width-input mid" />
+            <input
+              type="date"
+              class="full-width-input mid"
+              [(ngModel)]="clasificacionesData[0].fecha_inscripcion"
+              name="fechaInscripcion_0"
+            />
           </td>
           <td colspan="3" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              [(ngModel)]="clasificacionesData[0].matricula_partida"
+              name="matriculaPartida_0"
+            />
           </td>
           <td colspan="3" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              [(ngModel)]="clasificacionesData[0].numero_testimonio"
+              name="numeroTestimonio_0"
+            />
           </td>
           <td colspan="4" class="input-cell">
-            <input type="date" class="full-width-input mid" />
+            <input
+              type="date"
+              class="full-width-input mid"
+              [(ngModel)]="clasificacionesData[0].fecha_testimonio"
+              name="fechaTestimonio_0"
+            />
           </td>
           <td colspan="1" rowspan="2" class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              type="number"
+              class="full-width-input mid"
+              [(ngModel)]="clasificacionesData[0].superficie"
+              name="superficie_0"
+            />
           </td>
           <td colspan="1" rowspan="2" class="mid">M2</td>
         </tr>
+
+        <!-- REGISTRO 2 -->
         <tr>
           <td colspan="7" class="input-cell">
-            <select class="full-width-input">
-              <option value=""></option>
-              <option value="CI">CI</option>
-              <option value="NIT">NIT</option>
-              <option value="OTRO">OTRO</option>
-            </select>
+            <input
+              type="text"
+              class="full-width-input"
+              [(ngModel)]="clasificacionesData[1].nombre_notario_juez"
+              name="nombreNotarioJuez_1"
+              list="nombreNotarioOptions_1"
+              placeholder="Seleccione o escriba"
+            />
+            <datalist id="nombreNotarioOptions_1">
+              <option value="Nombre del Notario"></option>
+              <option value="Nombre del Juez"></option>
+              <option value="Otro Notario"></option>
+            </datalist>
           </td>
           <td colspan="3" class="input-cell">
-            <input type="date" class="full-width-input mid" />
+            <input
+              type="date"
+              class="full-width-input mid"
+              [(ngModel)]="clasificacionesData[1].fecha_inscripcion"
+              name="fechaInscripcion_1"
+            />
           </td>
           <td colspan="3" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              [(ngModel)]="clasificacionesData[1].matricula_partida"
+              name="matriculaPartida_1"
+            />
           </td>
           <td colspan="3" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              [(ngModel)]="clasificacionesData[1].numero_testimonio"
+              name="numeroTestimonio_1"
+            />
           </td>
           <td colspan="4" class="input-cell">
-            <input type="date" class="full-width-input mid" />
+            <input
+              type="date"
+              class="full-width-input mid"
+              [(ngModel)]="clasificacionesData[1].fecha_testimonio"
+              name="fechaTestimonio_1"
+            />
           </td>
         </tr>
+        <!-- REGISTRO 3 -->
+        <!-- REGISTRO 3 -->
         <tr>
           <td colspan="2">CODIGO CATASTRAL</td>
           <td colspan="2" class="mid">DISTRITO</td>
@@ -257,68 +464,154 @@
           <td colspan="3" class="mid">DIRECCION</td>
           <td>ZONA:</td>
           <td colspan="9" class="input-cell">
-            <input type="text" class="full-width-input" />
+            <input
+              type="text"
+              class="full-width-input"
+              placeholder="Ingresar datos zona"
+              [(ngModel)]="propiedadCatastralData[0].Zona"
+              name="Zona_0"
+            />
           </td>
         </tr>
         <tr>
-          <td colspan="2">Indentificado por el <br />propietario</td>
+          <td colspan="2">Identificado por el <br />propietario</td>
           <td colspan="2" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos"
+              [(ngModel)]="propiedadCatastralData[0].DistritoPropietario"
+              name="DistritoPropietario_0"
+            />
           </td>
           <td colspan="2" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos"
+              [(ngModel)]="propiedadCatastralData[0].SectorPropietario"
+              name="SectorPropietario_0"
+            />
           </td>
           <td colspan="2" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos"
+              [(ngModel)]="propiedadCatastralData[0].ManzanoPropietario"
+              name="ManzanoPropietario_0"
+            />
           </td>
           <td class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos"
+              [(ngModel)]="propiedadCatastralData[0].PredioPropietario"
+              name="PredioPropietario_0"
+            />
           </td>
           <td colspan="2" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos"
+              [(ngModel)]="propiedadCatastralData[0].SubPredioPropietario"
+              name="SubPredioPropietario_0"
+            />
           </td>
           <td colspan="9" class="input-cell">
-            <input type="text" class="full-width-input start-50" />
+            <input
+              type="text"
+              class="full-width-input start-50"
+              placeholder="Ingresar datos dirección"
+              [(ngModel)]="propiedadCatastralData[0].DireccionPropietario"
+              name="DireccionPropietario_0"
+            />
           </td>
           <td colspan="4" class="mid">VIAS DE:</td>
         </tr>
         <tr>
           <td colspan="2">Uso Exclusivo de <br />Catastro</td>
           <td colspan="2" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos"
+              [(ngModel)]="propiedadCatastralData[0].DistritoCatastro"
+              name="DistritoCatastro_0"
+            />
           </td>
           <td colspan="2" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos"
+              [(ngModel)]="propiedadCatastralData[0].SectorCatastro"
+              name="SectorCatastro_0"
+            />
           </td>
           <td colspan="2" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos"
+              [(ngModel)]="propiedadCatastralData[0].ManzanoCatastro"
+              name="ManzanoCatastro_0"
+            />
           </td>
           <td class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos"
+              [(ngModel)]="propiedadCatastralData[0].PredioCatastro"
+              name="PredioCatastro_0"
+            />
           </td>
           <td colspan="2" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos"
+              [(ngModel)]="propiedadCatastralData[0].SubPredioCatastro"
+              name="SubPredioCatastro_0"
+            />
           </td>
           <td colspan="9" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos dirección"
+              [(ngModel)]="propiedadCatastralData[0].DireccionCatastro"
+              name="DireccionCatastro_0"
+            />
           </td>
           <td colspan="4" class="input-cell">
-            <input type="text" class="full-width-input mid" />
+            <input
+              type="text"
+              class="full-width-input mid"
+              placeholder="Ingresar datos vías"
+              [(ngModel)]="propiedadCatastralData[0].ViasDe"
+              name="ViasDe_0"
+            />
           </td>
         </tr>
+
+        <!-- SECCION 4 -->
         <tr>
           <td colspan="7" style="color: rgb(0, 38, 255)">OBRA GRUESA</td>
-          <td colspan="2">USO</td>
+          <td colspan="2" style="color: blue">USO</td>
           <td class="mid">B1%</td>
           <td class="mid">B2%</td>
           <td class="mid">B3%</td>
           <td class="mid">B4%</td>
           <td class="mid">B5%</td>
-          <td colspan="7">SUPERFICIE CONSTRUIDA (M2)</td>
-          <td colspan="3">SERVICIOS BASICOS</td>
+          <td colspan="7" style="color: blue">SUPERFICIE CONSTRUIDA (M2)</td>
+          <td colspan="3" style="color: blue">SERVICIOS BASICOS</td>
         </tr>
         <!-- OBRA GRUESA ESTRUCTURA -->
-         
+
         <tr>
           <td colspan="2" style="color: red">ESTRUCTURA</td>
           <td class="mid">B1%</td>
@@ -342,7 +635,7 @@
           <td class="input-cell">
             <input type="number" class="full-width-input mid" />
           </td>
-          <td colspan="2">PLANTAS</td>
+          <td colspan="2" style="color: red">PLANTAS</td>
           <td class="mid">B1%</td>
           <td class="mid">B2%</td>
           <td class="mid">B3%</td>
@@ -358,22 +651,60 @@
           </td>
         </tr>
         <tr>
+          <!-- fila 1 del HᵒAᵒ PILOTAJE -->
           <td colspan="2">HᵒAᵒ PILOTAJE</td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HᵒAᵒ PILOTAJE"
+              data-columna="b1"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HᵒAᵒ PILOTAJE"
+              data-columna="b2"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HᵒAᵒ PILOTAJE"
+              data-columna="b3"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HᵒAᵒ PILOTAJE"
+              data-columna="b4"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HᵒAᵒ PILOTAJE"
+              data-columna="b5"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
+          <!--  -->
+
           <td colspan="2">Comercio</td>
           <td class="input-cell">
             <input type="number" class="full-width-input mid" />
@@ -416,22 +747,60 @@
           </td>
         </tr>
         <tr>
+          <!-- fila 2 HᵒAᵒ RADIER -->
           <td colspan="2">HᵒAᵒ RADIER</td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HᵒAᵒ RADIER"
+              data-columna="b1"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HᵒAᵒ RADIER"
+              data-columna="b2"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HᵒAᵒ RADIER"
+              data-columna="b3"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HᵒAᵒ RADIER"
+              data-columna="b4"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HᵒAᵒ RADIER"
+              data-columna="b5"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
+          <!--  -->
+
           <td colspan="2">Residencial</td>
           <td class="input-cell">
             <input type="number" class="full-width-input mid" />
@@ -474,22 +843,59 @@
           </td>
         </tr>
         <tr>
+          <!-- fila 3 HORMIGON ARMADO -->
           <td colspan="2">HORMIGON ARMADO</td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HORMIGON ARMADO"
+              data-columna="b1"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HORMIGON ARMADO"
+              data-columna="b2"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HORMIGON ARMADO"
+              data-columna="b3"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HORMIGON ARMADO"
+              data-columna="b4"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="HORMIGON ARMADO"
+              data-columna="b5"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
+          <!--  -->
           <td colspan="2"></td>
           <td class="input-cell">
             <input type="number" class="full-width-input mid" />
@@ -532,22 +938,60 @@
           </td>
         </tr>
         <tr>
+          <!-- fila 4 METALICA-->
           <td colspan="2">METALICA</td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="METALICA"
+              data-columna="b1"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="METALICA"
+              data-columna="b2"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="METALICA"
+              data-columna="b3"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="METALICA"
+              data-columna="b4"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="METALICA"
+              data-columna="b5"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
+          <!--  -->
+
           <td colspan="2"></td>
           <td class="input-cell">
             <input type="number" class="full-width-input mid" />
@@ -590,23 +1034,61 @@
           </td>
         </tr>
         <tr>
+          <!-- fila 5 CIMIENTO DE PIEDRA  -->
           <td colspan="2">CIMIENTO DE PIEDRA</td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="CIMIENTO DE PIEDRA"
+              data-columna="b1"
+              type="number"
+              class="full-width-input mid"
+              placeholder="1000"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="CIMIENTO DE PIEDRA"
+              data-columna="b2"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="CIMIENTO DE PIEDRA"
+              data-columna="b3"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="CIMIENTO DE PIEDRA"
+              data-columna="b4"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
+
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="CIMIENTO DE PIEDRA"
+              data-columna="b5"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
-          <td colspan="2">DESTINO</td>
+          <!--  -->
+          <td colspan="2" style="color: red">DESTINO</td>
           <td>B1%</td>
           <td>B2%</td>
           <td>B3%</td>
@@ -638,22 +1120,60 @@
           </td>
         </tr>
         <tr>
+          <!-- fila 6 LADRILLO TUBULAR -->
           <td colspan="2">LADRILLO TUBULAR</td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="LADRILLO TUBULAR"
+              data-columna="b1"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="LADRILLO TUBULAR"
+              data-columna="b2"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="LADRILLO TUBULAR"
+              data-columna="b3"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="LADRILLO TUBULAR"
+              data-columna="b4"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="LADRILLO TUBULAR"
+              data-columna="b5"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
+          <!--  -->
+
           <td colspan="2">Vivienda</td>
           <td class="input-cell">
             <input type="number" class="full-width-input mid" />
@@ -686,25 +1206,65 @@
           <td class="input-cell">
             <input type="number" class="full-width-input mid" />
           </td>
-          <td colspan="3" class="single-line">CARACTERISTICAS DEL TERRENO</td>
+          <td colspan="3" class="single-line" style="color: red">
+            CARACTERISTICAS DEL TERRENO
+          </td>
         </tr>
         <tr>
+          <!-- fila 7 MADERA (HORCONES) -->
           <td colspan="2">MADERA (HORCONES)</td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="MADERA (HORCONES)"
+              data-columna="b1"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="MADERA (HORCONES)"
+              data-columna="b2"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="MADERA (HORCONES)"
+              data-columna="b3"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="MADERA (HORCONES)"
+              data-columna="b4"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
           <td class="input-cell">
-            <input type="number" class="full-width-input mid" />
+            <input
+              #obraInput
+              data-estructura="MADERA (HORCONES)"
+              data-columna="b5"
+              type="number"
+              class="full-width-input mid"
+              placeholder="100"
+            />
           </td>
+          <!--  -->
+
           <td colspan="2">Comercio</td>
           <td class="input-cell">
             <input type="number" class="full-width-input mid" />
@@ -742,7 +1302,7 @@
             <input type="number" class="full-width-input mid" />
           </td>
         </tr>
-        
+
         <tr>
           <td colspan="2" style="color: red">MUROS</td>
           <td>B1%</td>

@@ -2,11 +2,12 @@ import { LoginComponent } from './components/Login/login/login.component';
 import { Routes } from '@angular/router';
 import { IndexComponent } from './components/Index/index/index.component';
 import { PanelDeControlComponent } from './components/panel-de-control/panel-de-control.component';
-import { RegistrarCatastroComponent } from './components/Catastro/registrar-catastro/registrar-catastro.component';
-import { ListarCatastroComponent } from './components/Catastro/listar-catastro/listar-catastro.component';
-import { VerCatastroComponent } from './components/Catastro/ver-catastro/ver-catastro.component';
-import { ActualizarCatastroComponent } from './components/Catastro/actualizar-catastro/actualizar-catastro.component';
+
 import { authGuard } from './guards/auth.guard';
+import { RegistrarCatastroComponent } from './components/GestionDeCatastro/registrar-catastro/registrar-catastro.component';
+import { ListarCatastroComponent } from './components/GestionDeCatastro/listar-catastro/listar-catastro.component';
+import { VerCatastroComponent } from './components/GestionDeCatastro/ver-catastro/ver-catastro.component';
+import { ActualizarCatastroComponent } from './components/GestionDeCatastro/actualizar-catastro/actualizar-catastro.component';
 export const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'index', component: IndexComponent },

@@ -1,0 +1,36 @@
+resetPropiedadCatastral(): void {
+    this.propiedadCatastralData = Array.from({ length: 2 }, () => ({
+      id: 0,
+      DistritoPropietario: '',
+      SectorPropietario: '',
+      ManzanoPropietario: '',
+      PredioPropietario: '',
+      SubPredioPropietario: '',
+      DireccionPropietario: '',
+      ViasDe: '',
+      DistritoCatastro: '',
+      SectorCatastro: '',
+      ManzanoCatastro: '',
+      PredioCatastro: '',
+      SubPredioCatastro: '',
+      DireccionCatastro: '',
+      Zona: '',
+    }));
+  }
+  resetClasificaciones(): void {
+    this.clasificacionesData = Array.from({ length: 2 }, () => ({
+      id: 0,
+      notario_juez: '',
+      nombre_notario_juez: '',
+      fecha_inscripcion: '',
+      matricula_partida: '',
+      numero_testimonio: '',
+      fecha_testimonio: '',
+      superficie: 0,
+    }));
+  }
+  resetForm(): void {
+    this.numero_inmueble = 0;
+    this.padron_municipal = '';
+    this.ngOnInit();
+  }
