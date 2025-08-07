@@ -1,1 +1,322 @@
-<p>r-j-1 works!</p>
+<div class="tabla-contenedor">
+  <form (ngSubmit)="registrarTodo()">
+    <div class="mb-3 row justify-content-end">
+      <div class="col-sm-2">
+        <label for="sectorManzanoInput" class="col-form-label text-end">
+          Registre Código: Sector/Manzano/NúmeroInmueble
+        </label>
+        <div class="d-flex justify-content-end align-items-center">
+          <input
+            type="text"
+            class="form-control me-2"
+            id="sectorManzanoInput"
+            [(ngModel)]="nuevoCodigo"
+            name="nuevoCodigo"
+            placeholder="Ej. 000/D/014"
+          />
+          <button
+            type="submit"
+            class="btn btn-primary d-flex align-items-center"
+          >
+            <i class="bi bi-plus-circle me-1"></i> Registrar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="mensaje" class="alert alert-info">{{ mensaje }}</div>
+
+    <div *ngIf="codigoRegistrado">
+      <strong>Código registrado:</strong>
+      <span class="badge bg-success">{{ codigoRegistrado.codigo }}</span>
+    </div>
+    <table>
+      <tr>
+        <td colspan="2" style="text-align: center">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Escudo_de_San_Borja%2C_Beni.jpg/640px-Escudo_de_San_Borja%2C_Beni.jpg"
+            alt=""
+            width="200"
+            height="200"
+          />
+        </td>
+        <td colspan="6" id="g-a">
+          Gobierno Autonomo Municipal de San Borja <br />
+          Direccion de Dessarrollo Urbano y Rural <br />
+          Unidad de Catastro Urbano
+        </td>
+        <td colspan="10" id="t-f">
+          <p id="t-f2">FORMULARIO UNICO DE</p>
+          REGISTRO CATASTRAL
+        </td>
+        <td colspan="6" id="f-n">
+          <p id="f-n2">FORMULARIO Nº</p>
+          (Uso Exclusivo de Catastro)
+        </td>
+      </tr>
+
+      <!-- SECCION 1 -->
+      <tbody>
+        <tr>
+          <td rowspan="5" class="vertical-text">PROPIETARIO (S)</td>
+          <td colspan="4" class="single-line">APELLIDO PATERNO</td>
+          <!-- Clase para mantener el texto en una sola línea -->
+          <td colspan="5" class="single-line">APELLIDO MATERNO</td>
+          <td colspan="5" class="single-line">NOMBRE (S)</td>
+          <td class="single-line mid">%</td>
+          <td colspan="2" class="single-line mid">TIP.DOC.</td>
+          <td colspan="3" class="single-line mid">Nº DOCUMENTO</td>
+          <td colspan="3" class="single-line mid px-3">NUMERO DE INMUEBLE</td>
+        </tr>
+        <!-- REGISTRO 1 -->
+        <tr>
+          <td colspan="4" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="apellidoPaterno_0"
+              required
+              placeholder="Apellido Paterno"
+            />
+          </td>
+          <td colspan="5" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="apellidoMaterno_0"
+              required
+              placeholder="Apellido Materno"
+            />
+          </td>
+          <td colspan="5" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="nombre_0"
+              required
+              placeholder="Nombre(s) del propietario"
+            />
+          </td>
+          <td class="input-cell">
+            <input
+              type="number"
+              class="full-width-input mid"
+              name="porcentaje_0"
+              placeholder="0"
+            />
+          </td>
+          <td colspan="2" class="input-cell">
+            <select
+              class="full-width-input mid"
+              name="tipoDocumento_0"
+              required
+            >
+              <option value=""></option>
+              <option value="CI">CI</option>
+              <option value="NIT">NIT</option>
+            </select>
+          </td>
+          <td colspan="3" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input mid"
+              name="numeroDocumento_0"
+              placeholder="0"
+            />
+          </td>
+          <td colspan="3" class="input-cell">
+            <input
+              type="number"
+              class="full-width-input mid"
+              name="numeroInmueble"
+              placeholder="0"
+            />
+          </td>
+        </tr>
+        <!-- REGISTRO 2 -->
+        <tr>
+          <td colspan="4" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="apellidoPaterno_1"
+              required
+              placeholder="Apellido Paterno"
+            />
+          </td>
+          <td colspan="5" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="apellidoMaterno_1"
+              required
+              placeholder="Apellido Materno"
+            />
+          </td>
+          <td colspan="5" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="nombre_1"
+              required
+              placeholder="Nombre(s) del propietario"
+            />
+          </td>
+          <td class="input-cell">
+            <input
+              type="number"
+              class="full-width-input mid"
+              name="porcentaje_1"
+              placeholder="0"
+            />
+          </td>
+          <td colspan="2" class="input-cell">
+            <select
+              class="full-width-input mid"
+              name="tipoDocumento_1"
+              required
+            >
+              <option value=""></option>
+              <option value="CI">CI</option>
+              <option value="NIT">NIT</option>
+            </select>
+          </td>
+          <td colspan="3" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input mid"
+              name="numeroDocumento_1"
+              placeholder="0"
+            />
+          </td>
+          <td colspan="3" class="single-line mid">PADRON MUNICIPAL (PMC)</td>
+        </tr>
+        <!-- REGISTRO 3 -->
+        <tr>
+          <td colspan="4" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="apellidoPaterno_2"
+              required
+              placeholder="Apellido Paterno"
+            />
+          </td>
+          <td colspan="5" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="apellidoMaterno_2"
+              required
+              placeholder="Apellido Materno"
+            />
+          </td>
+          <td colspan="5" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="nombre_2"
+              required
+              placeholder="Nombre(s) del propietario"
+            />
+          </td>
+          <td class="input-cell">
+            <input
+              type="number"
+              class="full-width-input mid"
+              name="porcentaje_2"
+              placeholder="0"
+            />
+          </td>
+          <td colspan="2" class="input-cell">
+            <select
+              class="full-width-input mid"
+              name="tipoDocumento_2"
+              required
+            >
+              <option value=""></option>
+              <option value="CI">CI</option>
+              <option value="NIT">NIT</option>
+            </select>
+          </td>
+          <td colspan="3" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input mid"
+              name="numeroDocumento_2"
+              placeholder="0"
+            />
+          </td>
+          <td colspan="3" rowspan="2" class="input-cell">
+            <input
+              type="number"
+              class="full-width-input mid"
+              name="padronMunicipal"
+              placeholder="0"
+            />
+          </td>
+        </tr>
+        <!-- REGISTRO 4 -->
+        <tr>
+          <td colspan="4" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="apellidoPaterno_3"
+              required
+              placeholder="Apellido Paterno"
+            />
+          </td>
+          <td colspan="5" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="apellidoMaterno_3"
+              required
+              placeholder="Apellido Materno"
+            />
+          </td>
+          <td colspan="5" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input"
+              name="nombre_3"
+              required
+              placeholder="Nombre(s) del propietario"
+            />
+          </td>
+          <td class="input-cell">
+            <input
+              type="number"
+              class="full-width-input mid"
+              name="porcentaje_3"
+              placeholder="0"
+            />
+          </td>
+          <td colspan="2" class="input-cell">
+            <select
+              class="full-width-input mid"
+              name="tipoDocumento_3"
+              required
+            >
+              <option value=""></option>
+              <option value="CI">CI</option>
+              <option value="NIT">NIT</option>
+            </select>
+          </td>
+          <td colspan="3" class="input-cell">
+            <input
+              type="text"
+              class="full-width-input mid"
+              name="numeroDocumento_3"
+              placeholder="0"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="floating-buttons">
+      <button type="submit" class="btn btn-success">Guardar</button>
+    </div>
+  </form>
+</div>

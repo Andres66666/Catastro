@@ -10,9 +10,9 @@ from django.contrib.auth.hashers import check_password
 
 import uuid
 
-from .models import  ClasificacionDerecho, Inmueble, ObraGruesa, Permisos, PropiedadCatastral, Propietario, Roles,  Usuarios, RolesPermisos, UsuariosRoles
-from .serializers import ClasificacionDerechoSerializer, IdentificadorInmuebleSerializer, InmuebleSerializer, ObraGruesaSerializer, PermisosSerializer, PropiedadCatastralSerializer, PropietarioSerializer, RolSerializer, RolesPermisosSerializer, UsuarioSerializer, LoginSerializer, UsuariosRolesSerializer
-from .models import IdentificadorInmueble
+from .models import   CodigoIdentificador, Inmueble, Permisos, Propietario, Roles,  Usuarios, RolesPermisos, UsuariosRoles
+from .serializers import   CodigoIdentificadorSerializer, InmuebleSerializer, PermisosSerializer, PropietarioSerializer,  RolSerializer, RolesPermisosSerializer, UsuarioSerializer, LoginSerializer, UsuariosRolesSerializer
+
 
 
 # Create your views here.
@@ -198,10 +198,100 @@ class RolesPermisosViewSet(viewsets.ModelViewSet):
 
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+    
+
+
+class CodigoIdentificadorViewSet(viewsets.ModelViewSet):
+    queryset = CodigoIdentificador.objects.all()
+    serializer_class = CodigoIdentificadorSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        codigo_identificador = serializer.save()
+        return Response(self.get_serializer(codigo_identificador).data, status=status.HTTP_201_CREATED)
+
+
+class InmuebleViewSet(viewsets.ModelViewSet):
+    queryset = Inmueble.objects.all()
+    serializer_class = InmuebleSerializer
+
+    def create(self, request, *args, **kwargs):
+        print("Received data:", request.data)  # Log the incoming request data
+        codigo_identificador = request.data.get('codigo_identificador')
+        if not codigo_identificador:
+            return Response({'error': 'Se requiere codigo_identificador'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Create the CodigoIdentificador if it doesn't exist
+        codigo_obj, created = CodigoIdentificador.objects.get_or_create(codigo=codigo_identificador)
+
+        # Prepare the inmueble data
+        inmueble_data = {
+            'codigo': codigo_obj,
+            'numero_inmueble': request.data.get('numero_inmueble'),
+            'padron_municipal': request.data.get('padron_municipal'),
+        }
+
+        # Create the Inmueble
+        inmueble_serializer = self.get_serializer(data=inmueble_data)
+        if not inmueble_serializer.is_valid():
+            print("Inmueble serializer errors:", inmueble_serializer.errors)  # Log serializer errors
+            return Response(inmueble_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        inmueble = inmueble_serializer.save()
+
+        # Handle Propietarios
+        propietarios_data = request.data.get('propietarios', [])
+        propietarios = []
+        for item in propietarios_data:
+            item['codigo'] = codigo_obj.codigo  # Assign the codigo_identificador
+            propietario_serializer = PropietarioSerializer(data=item)
+            if not propietario_serializer.is_valid():
+                print("Propietario serializer errors:", propietario_serializer.errors)  # Log serializer errors
+                return Response(propietario_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            propietario = propietario_serializer.save(inmueble=inmueble)
+            propietarios.append(propietario_serializer.data)
+
+        return Response({
+            'inmueble': inmueble_serializer.data,
+            'propietarios': propietarios
+        }, status=status.HTTP_201_CREATED)
+
+
+class PropietarioViewSet(viewsets.ModelViewSet):
+       queryset = Propietario.objects.all()
+       serializer_class = PropietarioSerializer
+
+       def create(self, request, *args, **kwargs):
+           data = request.data
+           is_many = isinstance(data, list)
+           items = data if is_many else [data]
+           propietarios = []
+
+           for item in items:
+               inmueble_id = item.get('inmueble_id')
+               if not inmueble_id:
+                   return Response({'error': 'Se requiere inmueble_id para cada propietario'}, status=status.HTTP_400_BAD_REQUEST)
+               try:
+                   inmueble = Inmueble.objects.get(pk=inmueble_id)
+               except Inmueble.DoesNotExist:
+                   return Response({'error': f'Inmueble {inmueble_id} no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+               item_copy = item.copy()
+               item_copy.pop('inmueble_id', None)
+               serializer = self.get_serializer(data=item_copy)
+               serializer.is_valid(raise_exception=True)
+               propietario = serializer.save(inmueble=inmueble)
+               propietarios.append(self.get_serializer(propietario).data)
+
+           return Response(propietarios if is_many else propietarios[0], status=status.HTTP_201_CREATED)
+   
+
 
 
 """ esto es la seccion del registro de catastro  """
-class InmuebleViewSet(viewsets.ModelViewSet):
+""" class InmuebleViewSet(viewsets.ModelViewSet):
     queryset = Inmueble.objects.all()
     serializer_class = InmuebleSerializer
 
@@ -273,37 +363,6 @@ class ClasificacionDerechoViewSet(viewsets.ModelViewSet):
 
         return Response(clasificaciones if is_many else clasificaciones[0], status=status.HTTP_201_CREATED)
 
-""" 
-class PropiedadCatastralViewSet(viewsets.ModelViewSet):
-    queryset = PropiedadCatastral.objects.all()
-    serializer_class = PropiedadCatastralSerializer
-
-    def create(self, request, *args, **kwargs):
-        data = request.data
-        is_many = isinstance(data, list)
-
-        items = data if is_many else [data]
-        propiedades = []
-
-        for item in items:
-            inmueble_id = item.get('inmueble_id')
-            if not inmueble_id:
-                return Response({'error': 'Se requiere inmueble_id para cada propiedad catastral'}, status=status.HTTP_400_BAD_REQUEST)
-
-            try:
-                inmueble = Inmueble.objects.get(pk=inmueble_id)
-            except Inmueble.DoesNotExist:
-                return Response({'error': f'Inmueble {inmueble_id} no encontrado'}, status=status.HTTP_404_NOT_FOUND)
-
-            item_copy = item.copy()
-            item_copy.pop('inmueble_id', None)
-            serializer = self.get_serializer(data=item_copy)
-            serializer.is_valid(raise_exception=True)
-            propiedad = serializer.save(inmueble=inmueble)
-            propiedades.append(self.get_serializer(propiedad).data)
-
-        return Response(propiedades if is_many else propiedades[0], status=status.HTTP_201_CREATED)
- """
 
 class ObraGruesaViewSet(viewsets.ModelViewSet):
     queryset = ObraGruesa.objects.all()
@@ -375,3 +434,4 @@ class PropiedadCatastralViewSet(viewsets.ModelViewSet):
 class IdentificadorInmuebleViewSet(viewsets.ModelViewSet):
     queryset = IdentificadorInmueble.objects.all()
     serializer_class = IdentificadorInmuebleSerializer
+ """

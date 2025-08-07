@@ -6,6 +6,7 @@ import { PanelDeControlComponent } from './components/panel-de-control/panel-de-
 import { authGuard } from './guards/auth.guard';
 import { RegistrarCatastroComponent } from './components/GestionDeCatastro/registrar-catastro/registrar-catastro.component';
 import { ListarCatastroComponent } from './components/GestionDeCatastro/listar-catastro/listar-catastro.component';
+import { RJ1Component } from './components/GestionDeCatastro/r-j-1/r-j-1.component';
 export const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'index', component: IndexComponent },
@@ -17,6 +18,8 @@ export const routes: Routes = [
     children: [
       { path: 'registrar-catastro', component: RegistrarCatastroComponent },
       { path: 'listar-catastro', component: ListarCatastroComponent },
+      { path: 'RJ1', component: RJ1Component },
+
       { path: '', redirectTo: 'listar-catastro', pathMatch: 'full' }, // Redirige a listar-catastro por defecto
     ],
   },

@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import ClasificacionDerecho, IdentificadorInmueble, Inmueble, ObraGruesa, PropiedadCatastral, Propietario, Usuarios, Roles, Permisos, UsuariosRoles, RolesPermisos
+from .models import ClasificacionDerecho, CodigoCatastral, CodigoIdentificador,  Inmueble, ObraGruesa, Propietario, Usuarios, Roles, Permisos, UsuariosRoles, RolesPermisos
 
 class LoginSerializer(serializers.Serializer):
     correo = serializers.EmailField(max_length=100, required=False, allow_null=True)
@@ -40,38 +40,55 @@ class RolesPermisosSerializer(serializers.ModelSerializer):
 
 """ esto es la seccion del registro de catastro  """
 # serializers.py
-class InmuebleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Inmueble  
-        fields = '__all__' 
 
+# Serializador del identificador base
+class CodigoIdentificadorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CodigoIdentificador
+        fields = '__all__'
+
+
+# Inmueble
+class InmuebleSerializer(serializers.ModelSerializer):
+    codigo = CodigoIdentificadorSerializer(read_only=True)
+
+    class Meta:
+        model = Inmueble
+        fields = '__all__'
+
+
+# Propietario
 class PropietarioSerializer(serializers.ModelSerializer):
-    inmueble = InmuebleSerializer(read_only=True)
-    
+    codigo = CodigoIdentificadorSerializer(read_only=True)
+
     class Meta:
         model = Propietario
-        fields = '__all__'  
+        fields = '__all__'
 
+
+# Clasificación de derecho
 class ClasificacionDerechoSerializer(serializers.ModelSerializer):
-    inmueble = InmuebleSerializer(read_only=True)
+    codigo = CodigoIdentificadorSerializer(read_only=True)
+
     class Meta:
         model = ClasificacionDerecho
         fields = '__all__'
-class PropiedadCatastralSerializer(serializers.ModelSerializer):
-    inmueble = InmuebleSerializer(read_only=True)
+
+
+# Propiedad catastral
+class CodigoCatastralSerializer(serializers.ModelSerializer):
+    codigo = CodigoIdentificadorSerializer(read_only=True)
+
     class Meta:
-        model = PropiedadCatastral
+        model = CodigoCatastral
         fields = '__all__'
-    
+
+
+# Obra gruesa
 class ObraGruesaSerializer(serializers.ModelSerializer):
-    inmueble = InmuebleSerializer(read_only=True)
+    codigo = CodigoIdentificadorSerializer(read_only=True)
+
     class Meta:
         model = ObraGruesa
         fields = '__all__'
 
-class IdentificadorInmuebleSerializer(serializers.ModelSerializer):
-    inmueble = InmuebleSerializer(read_only=True)
-
-    class Meta:
-        model = IdentificadorInmueble
-        fields = '__all__'

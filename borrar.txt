@@ -1,3 +1,4 @@
+ng generate component components/GestionDeCatastro/R-J-1
 <table>
 	<tbody>
 		<tr>

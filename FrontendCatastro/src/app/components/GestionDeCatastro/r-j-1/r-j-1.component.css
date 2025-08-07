@@ -1,0 +1,220 @@
+/* Contenedor de la tabla */
+.tabla-contenedor {
+  overflow-x: auto; /* Permitir desplazamiento horizontal */
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  background-color: white;
+  padding: 20px; /* Espaciado interno opcional */
+}
+
+/* Tabla */
+table {
+  margin-top: 50px;
+  margin-bottom: 150px;
+  background-color: white;
+  width: 100%; /* Asegúrate de que la tabla ocupe el 100% del ancho del contenedor */
+  min-width: 1200px; /* Establece un ancho mínimo para la tabla */
+}
+
+/* Ocultar scrollbar en navegadores WebKit */
+table::-webkit-scrollbar {
+  display: none; /* Oculta la barra de desplazamiento en Chrome y Safari */
+}
+
+/* Celdas */
+td,
+th {
+  border: 1px solid #595959; /* Borde de las celdas */
+  border-collapse: collapse; /* Colapsa los bordes de la tabla */
+  padding: 8px; /* Espaciado interno */
+  height: 40px; /* Permitir que la altura se ajuste automáticamente */
+}
+/* Texto vertical */
+.vertical-text {
+  writing-mode: vertical-rl; /* Rotar el texto verticalmente */
+  transform: rotate(180deg); /* Ajustar la dirección del texto */
+  text-align: center; /* Centrar el texto */
+  padding: 5px; /* Ajustar el padding para reducir el espacio horizontal */
+  width: 50px; /* Establecer un ancho específico para la celda */
+  height: auto;
+}
+
+/* Texto en una sola línea */
+.single-line {
+  white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+}
+
+/* Texto centrado de la celda */
+.mid {
+  text-align: center;
+}
+
+/* Estilos específicos para diferentes elementos */
+#g-a {
+  text-align: start;
+  font-size: 15px; /* Aumentar el tamaño del texto */
+}
+
+/* Ajustar la celda de la imagen */
+td img {
+  max-width: 100%; /* Asegura que la imagen no exceda el ancho de la celda */
+  height: auto; /* Mantiene la proporción de la imagen */
+  display: block; /* Asegura que la imagen se comporte como un bloque */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+/* Estilos específicos para diferentes elementos */
+#t-f {
+  text-align: center;
+  padding: 20px;
+  font-size: 50px; /* Aumentar el tamaño del texto */
+  white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+  min-width: 300px; /* Establecer un ancho mínimo para la celda */
+}
+
+#t-f2 {
+  text-align: center;
+  font-size: 40px; /* Aumentar el tamaño del texto */
+}
+
+#f-n {
+  text-align: center;
+  font-size: 23px; /* Aumentar el tamaño del texto */
+}
+
+#f-n2 {
+  text-align: center;
+  font-size: 26px; /* Aumentar el tamaño del texto */
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+  td,
+  th {
+    font-size: 12px; /* Ajustar el tamaño de la fuente para pantallas pequeñas */
+    padding: 5px; /* Reducir el padding para celdas */
+    width: auto; /* Permitir que el ancho de las celdas se ajuste automáticamente */
+  }
+
+  #t-f {
+    font-size: 30px; /* Ajustar el tamaño del texto del título */
+  }
+
+  #t-f2 {
+    font-size: 24px; /* Ajustar el tamaño del texto del subtítulo */
+  }
+
+  #g-a {
+    font-size: 11px; /* Ajustar el tamaño del texto de la dirección */
+  }
+}
+
+/* esto es la parte final de la firmas  */
+.td-firmas {
+  height: 200px; /* Altura del td */
+}
+
+/* esto la seccion de las imgagenes  */
+.contenedor-diagonal {
+  position: relative;
+  height: 100%; /* Ajusta según sea necesario */
+  width: 100%; /* Ajusta según sea necesario */
+}
+
+.div-extremo {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  position: absolute;
+  width: 30%; /* Tamaño de los div de los extremos */
+  height: 350px; /* Ajusta según sea necesario */
+}
+
+.div-extremo.izquierda {
+  top: 0;
+  left: 0;
+}
+
+.div-extremo.derecha {
+  position: absolute; /* Si necesitas que esté en una posición fija */
+  bottom: 0;
+  right: 0;
+  border: 1px solid black; /* Agrega solo el borde */
+  background-color: transparent; /* Elimina el fondo de color */
+}
+
+.div-medio {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagen-centrada {
+  width: calc(95% - 90px); /* Se reduce un poco menos */
+  height: calc(95% - 90px);
+  object-fit: contain; /* Mantiene la proporción de la imagen */
+}
+/* *********************** */
+/* esto es para los input  */
+/* *********************** */
+
+/* Estilo para la celda */
+.input-cell {
+  padding: 0; /* Elimina el padding */
+  margin: 0; /* Elimina el margen */
+  height: 40px; /* Ajusta la altura según sea necesario */
+}
+
+/* Estilo para el input */
+.full-width-input {
+  width: 100%; /* Ocupa todo el ancho del td */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+  border: none; /* Sin borde */
+  background-color: transparent; /* Fondo transparente */
+  height: 100%; /* Ocupa toda la altura del td */
+  margin: 0; /* Elimina el margen */
+}
+
+/* Ocultar flechas en inputs de tipo number */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Opcional: Si deseas eliminar el margen en Firefox */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* Eliminar margen */
+}
+
+/* Estilo para inputs de tipo texto */
+input[type="text"] {
+  -webkit-appearance: none; /* Para Chrome y Safari */
+  -moz-appearance: textfield; /* Para Firefox */
+  appearance: none; /* Propiedad estándar */
+}
+
+/* estos son los CSS para el boton de guardar */
+.floating-buttons {
+  position: fixed;
+  bottom: 20px; /* Ajusta la distancia desde la parte inferior */
+  left: 50%;
+  transform: translateX(-50%); /* Centra los botones horizontalmente */
+  display: flex;
+  gap: 30px; /* Aumenta la separación entre botones */
+  z-index: 1000; /* Asegura que estén sobre otros elementos */
+}
+
+/* Estilos para los botones */
+.floating-buttons button {
+  font-size: 18px; /* Aumenta el tamaño del texto */
+  padding: 15px 30px; /* Aumenta el tamaño del botón */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para resaltar */
+}
